@@ -70,7 +70,12 @@
                 <label for="PublishedDate" class="form-label">Publish Date</label>
                 <input name = "PublishedDate" type="date" class="form-control" id="PublishedDate" asp-for="BlogPost.PublishedDateTime">
             </div>
-
+            
+            <div class="mb-3">
+                <label class="form-label">Tags (*comma seperated)</label>
+                <input type="text" id="tags" class="form-control" asp-for="Tags"/> 
+            </div>
+            
             <div class="form-check mb-3">
                 <input class="form-check-input" type="checkbox" id="isVisible" asp-for="BlogPost.Visible">
                 <label class="form-check-label" for="isVisible">
