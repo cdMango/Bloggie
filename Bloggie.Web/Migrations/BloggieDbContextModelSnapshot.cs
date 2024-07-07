@@ -82,7 +82,23 @@ namespace Bloggie.Web.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BlogPostId");
+
                     b.ToTable("Tags");
+                });
+
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.Tag", b =>
+                {
+                    b.HasOne("Bloggie.Web.Models.Domain.BlogPost", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPost", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }
