@@ -22,7 +22,7 @@ public class BlogPostRepository : IBlogPostRepository
     
     public async Task<BlogPost> GetAsync(Guid id)
     {
-        return await bloggieDbContext.BlogPosts.FindAsync(id); 
+        return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).FirstOrDefaultAsync(); 
     }
 
     public async Task<BlogPost> AddAsync(BlogPost blogPost)
