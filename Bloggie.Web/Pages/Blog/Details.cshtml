@@ -1,0 +1,33 @@
+﻿@page "/blog/{urlHandle}"
+@model Bloggie.Web.Pages.Blog.Details
+
+@{
+    ViewData["Title"] = Model.BlogPost.PageTitle; 
+}
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            @if (Model.BlogPost != null)
+            {
+                <h1 class="mb-3">@Model.BlogPost.Heading</h1>
+                
+                <div class="d-flex justify-content-between">
+                    <span>@Model.BlogPost.Author</span>
+                    <span>@Model.BlogPost.PublishedDateTime.ToShortDateString()</span>
+                </div>
+                
+                
+                
+                <div class="mb-3 blog-details">
+                    <img src="@Model.BlogPost.FeaturedImageURL" class="d-block image-fluid mb-3"/>
+                    @Html.Raw(Model.BlogPost.Content)
+                </div>
+            }
+            else
+            {
+                <h2>Blog post not found</h2>
+            }
+        </div>
+    </div>
+</div>

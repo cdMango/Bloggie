@@ -19,6 +19,7 @@ public class BlogPostRepository : IBlogPostRepository
         return await bloggieDbContext.BlogPosts.ToListAsync(); 
     }
 
+    
     public async Task<BlogPost> GetAsync(Guid id)
     {
         return await bloggieDbContext.BlogPosts.FindAsync(id); 
@@ -29,6 +30,11 @@ public class BlogPostRepository : IBlogPostRepository
         await bloggieDbContext.BlogPosts.AddAsync(blogPost);
         await bloggieDbContext.SaveChangesAsync();
         return blogPost;
+    }
+    public async Task<BlogPost> GetAsync(string urlHandle)
+    {
+        return await bloggieDbContext.BlogPosts.FirstOrDefaultAsync(x => x.UrlHandle == urlHandle); 
+
     }
 
     public async Task<BlogPost> UpdateAsync(BlogPost blogPost)
