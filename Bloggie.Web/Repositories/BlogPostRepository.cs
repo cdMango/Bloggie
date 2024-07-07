@@ -16,7 +16,7 @@ public class BlogPostRepository : IBlogPostRepository
     
     public async Task<IEnumerable<BlogPost>> GetAllAsync()
     {
-        return await bloggieDbContext.BlogPosts.ToListAsync(); 
+        return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).ToListAsync(); 
     }
 
     
@@ -62,9 +62,8 @@ public class BlogPostRepository : IBlogPostRepository
                 
                 //add new tags
                 blogPost.Tags.ToList().ForEach(x => x.BlogPostId = exisitingBlogPost.Id);
-                await bloggieDbContext.Tags.AddRangeAsync(); 
+                await bloggieDbContext.Tags.AddRangeAsync(blogPost.Tags); 
                 
-
             }
         }
 
