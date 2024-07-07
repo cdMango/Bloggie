@@ -36,7 +36,7 @@ public class EditModel : PageModel
 
         if (BlogPost != null && BlogPost.Tags != null)
         {
-            Tags = string.Join(',', BlogPost.Tags);
+            Tags = string.Join(',', BlogPost.Tags.Select(x => x.Name));
         }
     }
 
