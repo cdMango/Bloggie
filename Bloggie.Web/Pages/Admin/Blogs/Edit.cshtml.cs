@@ -32,7 +32,12 @@ public class EditModel : PageModel
     }
     public async Task OnGet(Guid id)
     {
-        BlogPost = await blogPostRepository.GetAsync(id); 
+        BlogPost = await blogPostRepository.GetAsync(id);
+
+        if (BlogPost != null && BlogPost.Tags != null)
+        {
+            Tags = string.Join(',', BlogPost.Tags);
+        }
     }
 
     public async Task<IActionResult> OnPostEdit()
