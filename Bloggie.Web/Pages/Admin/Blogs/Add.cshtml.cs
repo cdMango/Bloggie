@@ -19,6 +19,8 @@ public class AddModel : PageModel
     [BindProperty]
     public AddBlogPost AddBlogPostRequest { get; set; }
 
+    [BindProperty]
+    public IFormFile FeaturedImage { get; set; }
     //Default Constructor
     public AddModel(IBlogPostRepository blogPostRepository)
     {
