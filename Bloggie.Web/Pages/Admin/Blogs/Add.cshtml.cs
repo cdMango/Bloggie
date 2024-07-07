@@ -49,7 +49,8 @@ public class AddModel : PageModel
             UrlHandle = AddBlogPostRequest.UrlHandle,
             PublishedDateTime = AddBlogPostRequest.PublishedDateTime,
             Author = AddBlogPostRequest.Author,
-            Visible = AddBlogPostRequest.Visible
+            Visible = AddBlogPostRequest.Visible,
+            Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag(){Name = x.Trim()})) 
         };
 
         await blogPostRepository.AddAsync(blogpost);
