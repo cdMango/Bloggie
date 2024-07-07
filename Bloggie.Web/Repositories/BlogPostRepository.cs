@@ -33,13 +33,14 @@ public class BlogPostRepository : IBlogPostRepository
     }
     public async Task<BlogPost> GetAsync(string urlHandle)
     {
-        return await bloggieDbContext.BlogPosts.FirstOrDefaultAsync(x => x.UrlHandle == urlHandle); 
+        return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).FirstOrDefaultAsync(x => x.UrlHandle == urlHandle); 
 
     }
 
     public async Task<BlogPost> UpdateAsync(BlogPost blogPost)
     {
-        var exisitingBlogPost = await bloggieDbContext.BlogPosts.FindAsync(blogPost.Id);
+        var exisitingBlogPost = await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).
+            FirstOrDefaultAsync(x => x.Id == blogPost.Id);
 
         if (exisitingBlogPost != null)
         {
@@ -52,6 +53,19 @@ public class BlogPostRepository : IBlogPostRepository
             exisitingBlogPost.PublishedDateTime = blogPost.PublishedDateTime;
             exisitingBlogPost.Author = blogPost.Author;
             exisitingBlogPost.Visible = blogPost.Visible; 
+            
+            // Delete the exisiting tags
+            if (blogPost.Tags != null && blogPost.Tags.Any())
+            {
+                //delete exisiting tags
+                bloggieDbContext.Tags.RemoveRange(exisitingBlogPost.Tags);
+                
+                //add new tags
+                blogPost.Tags.ToList().ForEach(x => x.BlogPostId = exisitingBlogPost.Id);
+                await bloggieDbContext.Tags.AddRangeAsync(); 
+                
+
+            }
         }
 
         await bloggieDbContext.SaveChangesAsync();

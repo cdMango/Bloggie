@@ -44,7 +44,7 @@ public class EditModel : PageModel
     {
         try
         {
-            
+            BlogPost.Tags = new List<Tag>(Tags.Split(',').Select(x => new Tag(){ Name = x.Trim() })); 
             await blogPostRepository.UpdateAsync(BlogPost);
 
             ViewData["Notification"] = new Notification
