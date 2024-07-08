@@ -17,7 +17,15 @@
                     <span>@Model.BlogPost.PublishedDateTime.ToShortDateString()</span>
                 </div>
                 
-                
+                <div class="mb-3">
+                    @if (Model.BlogPost.Tags != null)
+                    {
+                        foreach (var tag in Model.BlogPost.Tags)
+                        {
+                            <span class="badge bg-dark">@tag.Name</span>
+                        }
+                    }
+                </div>
                 
                 <div class="mb-3 blog-details">
                     <img src="@Model.BlogPost.FeaturedImageURL" class="d-block image-fluid mb-3"/>
