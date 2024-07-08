@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ji+5RIwA+AEYspuGvR5rLdBk/fKkKulQiT7YHQYhyoE=",
+  "Hash": "C9JdUsKMdXBLS7/hjIgkAA1PHbXZtTQAmgaObpWnJ5g=",
   "Source": "Bloggie.Web",
   "BasePath": "_content/Bloggie.Web",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\xia0f\\RiderProjects\\Bloggie\\Bloggie.Web\\wwwroot\\dist\\bundle.js",
+      "SourceId": "Bloggie.Web",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\xia0f\\RiderProjects\\Bloggie\\Bloggie.Web\\wwwroot\\",
+      "BasePath": "_content/Bloggie.Web",
+      "RelativePath": "dist/bundle.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\dist\\bundle.js"
     },
     {
       "Identity": "C:\\Users\\xia0f\\RiderProjects\\Bloggie\\Bloggie.Web\\wwwroot\\favicon.ico",

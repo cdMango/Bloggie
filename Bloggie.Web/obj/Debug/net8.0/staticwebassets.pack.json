@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\xia0f\\RiderProjects\\Bloggie\\Bloggie.Web\\wwwroot\\dist\\bundle.js",
+      "PackagePath": "staticwebassets\\dist\\bundle.js"
+    },
+    {
       "Id": "C:\\Users\\xia0f\\RiderProjects\\Bloggie\\Bloggie.Web\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },

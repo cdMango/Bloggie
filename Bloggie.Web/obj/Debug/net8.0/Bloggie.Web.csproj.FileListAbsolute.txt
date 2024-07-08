@@ -335,3 +335,5 @@ C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\obj\Debug\net8.0\refint\Bloggie
 C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\obj\Debug\net8.0\Bloggie.Web.pdb
 C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\obj\Debug\net8.0\Bloggie.Web.genruntimeconfig.cache
 C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\obj\Debug\net8.0\ref\Bloggie.Web.dll
+C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\bin\Debug\net8.0\package-lock.json
+C:\Users\xia0f\RiderProjects\Bloggie\Bloggie.Web\bin\Debug\net8.0\package.json
