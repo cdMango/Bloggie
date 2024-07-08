@@ -33,7 +33,8 @@ public class BlogPostRepository : IBlogPostRepository
     }
     public async Task<BlogPost> GetAsync(string urlHandle)
     {
-        return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).FirstOrDefaultAsync(x => x.UrlHandle == urlHandle); 
+        return await bloggieDbContext.BlogPosts
+            .Include(nameof(BlogPost.Tags)).FirstOrDefaultAsync(x => x.UrlHandle == urlHandle); 
 
     }
 
