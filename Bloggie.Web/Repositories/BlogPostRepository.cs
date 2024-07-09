@@ -19,7 +19,14 @@ public class BlogPostRepository : IBlogPostRepository
         return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).ToListAsync(); 
     }
 
-    
+    public async Task<IEnumerable<BlogPost>> GetAllAsync(string tagName)
+    {
+        return await (bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags))
+            .Where(x => x.Tags.Any(x => x.Name == tagName)))
+            .ToListAsync(); 
+    }
+
+
     public async Task<BlogPost> GetAsync(Guid id)
     {
         return await bloggieDbContext.BlogPosts.Include(nameof(BlogPost.Tags)).FirstOrDefaultAsync(x => x.Id == id); 
