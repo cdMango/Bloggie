@@ -29,7 +29,7 @@ public class RegisterModel : PageModel
             Email = RegisterViewModel.Email
         };
         var identityResult = await _userManager.CreateAsync(user, RegisterViewModel.Password);
-
+ 
         if (identityResult.Succeeded)
         {
             ViewData["Notification"] = new Notification
