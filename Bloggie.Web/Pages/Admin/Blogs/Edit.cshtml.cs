@@ -7,11 +7,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Models.ViewModels;
 using Bloggie.Web.Repositories;
+using CloudinaryDotNet.Actions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 namespace Bloggie.Web.Pages.Admin.Blogs;
 
+
+[Authorize(Roles = "Admin")]
 public class EditModel : PageModel
 {
     private readonly IBlogPostRepository blogPostRepository;

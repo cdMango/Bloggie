@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace Bloggie.Web.Pages.Admin.Blogs;
 
 
-[Authorize]
+[Authorize(Roles = "Admin")]
 public class AddModel : PageModel
 {
     public IBlogPostRepository BlogPostRepository { get; }

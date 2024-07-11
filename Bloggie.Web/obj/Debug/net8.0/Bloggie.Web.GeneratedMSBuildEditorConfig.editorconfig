@@ -26,6 +26,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/mac/RiderProjects/Bloggie/Bloggie.Web
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/mac/RiderProjects/Bloggie/Bloggie.Web/Pages/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWNjZXNzRGVuaWVkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/mac/RiderProjects/Bloggie/Bloggie.Web/Pages/Admin/Blogs/Add.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXMvQWRtaW4vQmxvZ3MvQWRkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

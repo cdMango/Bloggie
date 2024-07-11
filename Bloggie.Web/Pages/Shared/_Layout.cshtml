@@ -29,21 +29,25 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
                         </li>
-                        <li class="nav-item dropdown"> 
-                            <a class="nav-link dropdown-toggle" href="#" role ="button" data-bs-toggle = "dropdown"
-                               aria-expanded="False" id="navbarDropdownAdmin">
-                                Admin
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
-                                <li>
-                                    <a class="dropdown-item" href="/admin/blogs/add">Add Blog Post</a> 
-                                </li>
+                        
+                        @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                   aria-expanded="False" id="navbarDropdownAdmin">
+                                    Admin
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdownAdmin">
+                                    <li>
+                                        <a class="dropdown-item" href="/admin/blogs/add">Add Blog Post</a>
+                                    </li>
 
-                                <li>
-                                    <a class="dropdown-item" href="/admin/blogs/list">Blog Post</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li>
+                                        <a class="dropdown-item" href="/admin/blogs/list">Blog Post</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
                     
                     <div class="d-flex align-items-center">
