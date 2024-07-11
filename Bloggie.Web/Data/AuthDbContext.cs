@@ -81,8 +81,8 @@ public class AuthDbContext : IdentityDbContext
 
             new IdentityUserRole<string>
             {
-                RoleId = adminRoleId,
-                UserId = userRoleId
+                RoleId = userRoleId,
+                UserId = superAdminId 
             },
         };
 
