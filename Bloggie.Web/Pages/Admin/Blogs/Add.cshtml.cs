@@ -5,9 +5,12 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Bloggie.Web.Models.Domain;
 using Bloggie.Web.Repositories;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Bloggie.Web.Pages.Admin.Blogs;
 
+
+[Authorize]
 public class AddModel : PageModel
 {
     public IBlogPostRepository BlogPostRepository { get; }
