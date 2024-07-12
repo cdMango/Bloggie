@@ -67,6 +67,25 @@ namespace Bloggie.Web.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostLike", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogPostLike");
+                });
+
             modelBuilder.Entity("Bloggie.Web.Models.Domain.Tag", b =>
                 {
                     b.Property<Guid>("Id")
@@ -87,6 +106,15 @@ namespace Bloggie.Web.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostLike", b =>
+                {
+                    b.HasOne("Bloggie.Web.Models.Domain.BlogPost", null)
+                        .WithMany("Likes")
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Bloggie.Web.Models.Domain.Tag", b =>
                 {
                     b.HasOne("Bloggie.Web.Models.Domain.BlogPost", null)
@@ -98,6 +126,8 @@ namespace Bloggie.Web.Migrations
 
             modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPost", b =>
                 {
+                    b.Navigation("Likes");
+
                     b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
