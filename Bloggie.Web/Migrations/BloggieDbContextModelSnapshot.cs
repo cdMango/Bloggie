@@ -67,6 +67,32 @@ namespace Bloggie.Web.Migrations
                     b.ToTable("BlogPosts");
                 });
 
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostComment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("BlogPostid")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("DateAdded")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostid");
+
+                    b.ToTable("BlogPostComment");
+                });
+
             modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostLike", b =>
                 {
                     b.Property<Guid>("Id")
@@ -106,6 +132,15 @@ namespace Bloggie.Web.Migrations
                     b.ToTable("Tags");
                 });
 
+            modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostComment", b =>
+                {
+                    b.HasOne("Bloggie.Web.Models.Domain.BlogPost", null)
+                        .WithMany("Comments")
+                        .HasForeignKey("BlogPostid")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPostLike", b =>
                 {
                     b.HasOne("Bloggie.Web.Models.Domain.BlogPost", null)
@@ -126,6 +161,8 @@ namespace Bloggie.Web.Migrations
 
             modelBuilder.Entity("Bloggie.Web.Models.Domain.BlogPost", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Likes");
 
                     b.Navigation("Tags");
