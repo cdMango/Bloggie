@@ -12,21 +12,34 @@ public class Details : PageModel
     private readonly IBlogPostLikeRepository _blogPostLikeRepository;
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
+    private readonly IBlogPostCommentRepository _blogPostCommentRepository;
 
     public BlogPost BlogPost { get; set; }
    
     public int TotalLikes { get; set; }
 
     public bool Liked { get; set; }
+    
+    [BindProperty]
+    public Guid BlogPostId { get; set; }
+    
+    
+    [BindProperty]
+    public string CommentDescription { get; set; }
+    
+
+
     public Details(IBlogPostRepository blogPostRepository, 
         IBlogPostLikeRepository blogPostLikeRepository,
         SignInManager<IdentityUser> signInManager,
-        UserManager<IdentityUser> userManager)
+        UserManager<IdentityUser> userManager,
+        IBlogPostCommentRepository blogPostCommentRepository)
     {
         _blogPostRepository = blogPostRepository;
         _blogPostLikeRepository = blogPostLikeRepository;
         _signInManager = signInManager;
         _userManager = userManager;
+        _blogPostCommentRepository = blogPostCommentRepository;
     }
     public async Task<IActionResult> OnGet(string urlHandle)
     {
@@ -34,6 +47,7 @@ public class Details : PageModel
 
         if (BlogPost != null)
         {
+            BlogPostId = BlogPost.Id; 
             if (_signInManager.IsSignedIn(User))
                 {
                     var likes = await _blogPostLikeRepository.GetLikesForBlog(BlogPost.Id);
@@ -45,5 +59,24 @@ public class Details : PageModel
             
         }
         return Page(); 
+    }
+
+    public async Task<IActionResult> OnPost(string urlHandle)
+    {
+        if(_signInManager.IsSignedIn(User) && !string.IsNullOrWhiteSpace(CommentDescription)){
+
+            var userId = _userManager.GetUserId(User);
+            var comment = new BlogPostComment()
+            {
+
+                BlogPostid = BlogPostId,
+                Description = CommentDescription,
+                DateAdded = DateTime.Now,
+                UserId = Guid.Parse(userId)
+            };
+            await _blogPostCommentRepository.AddAsync(comment);
+
+        }
+        return RedirectToPage("/Blog/Details", new { urlHandle = urlHandle });
     }
 }
