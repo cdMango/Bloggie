@@ -1,4 +1,5 @@
 ﻿using Bloggie.Web.Models.Domain;
+using Bloggie.Web.Models.ViewModels;
 using Bloggie.Web.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,7 @@ public class Details : PageModel
     private readonly UserManager<IdentityUser> _userManager;
     private readonly IBlogPostCommentRepository _blogPostCommentRepository;
 
+    public List<BlogComment> Comments { get; set; }
     public BlogPost BlogPost { get; set; }
    
     public int TotalLikes { get; set; }
@@ -52,7 +54,9 @@ public class Details : PageModel
                 {
                     var likes = await _blogPostLikeRepository.GetLikesForBlog(BlogPost.Id);
                     var userId = _userManager.GetUserId(User);
-                    Liked = likes.Any(x => x.UserId == Guid.Parse(userId)); 
+                    Liked = likes.Any(x => x.UserId == Guid.Parse(userId));
+                    await GetComments(); 
+                    var blogPostComments =  await _blogPostCommentRepository.GetAllAsync(BlogPost.Id); 
                 }
 
             TotalLikes = await _blogPostLikeRepository.GetTotalLikesForBlog(BlogPost.Id);
@@ -78,5 +82,23 @@ public class Details : PageModel
 
         }
         return RedirectToPage("/Blog/Details", new { urlHandle = urlHandle });
+    }
+
+    private async Task GetComments()
+    {
+        var blogPostComments = await _blogPostCommentRepository.GetAllAsync((BlogPost.Id));
+
+        var blogCommentsViewModel = new List<BlogComment>(); 
+        foreach (var blogPostComment in blogPostComments)
+        {
+            blogCommentsViewModel.Add(new BlogComment
+            {
+                DateAdded = blogPostComment.DateAdded, 
+                Description = blogPostComment.Description, 
+                Username = (await _userManager.FindByIdAsync(blogPostComment.UserId.ToString())).UserName
+            });
+        }
+
+        Comments = blogCommentsViewModel; 
     }
 }

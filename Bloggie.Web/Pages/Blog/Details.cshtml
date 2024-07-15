@@ -1,5 +1,6 @@
 ﻿@page "/blog/{urlHandle}"
 @using Microsoft.AspNetCore.Identity
+@using Microsoft.EntityFrameworkCore
 @model Bloggie.Web.Pages.Blog.Details
 @inject UserManager<IdentityUser> UserManager
 @inject SignInManager<IdentityUser> signInManager
@@ -74,7 +75,25 @@
                         }
                     </div>
                     <div class="card-body">
+                        @if(Model.Comments != null && Model.Comments.Any()){
+                            
+                        @foreach (var comment in Model.Comments)
+                        {
+                            <div class="card">
+                                @comment.Description
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>@comment.Username</span>
+                                <span>@comment.DateAdded.ToString()</span>
+                            </div>
+                        }
+                        }
+                        else
+                        {
+                            <p>No comments. </p>
+                        }
                         
+
                     </div>
                 </div>
             }
