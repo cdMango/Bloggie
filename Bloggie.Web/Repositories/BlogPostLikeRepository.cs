@@ -31,4 +31,10 @@ public class BlogPostLikeRepository : IBlogPostLikeRepository
         await _bloggieDbContext.BlogPostLike.AddAsync(like);
         await _bloggieDbContext.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<BlogPostLike>> GetLikesForBlog(Guid blogPostId)
+    {
+       return await _bloggieDbContext.BlogPostLike.Where(x => x.BlogPostId == blogPostId).ToListAsync(); 
+       
+    }
 }
